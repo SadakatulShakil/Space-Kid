@@ -1,5 +1,7 @@
 import 'dart:math';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
 import 'package:planet_plus/screens/main/widgets/enhanced_star.dart';
 import 'package:provider/provider.dart';
 import '../../models/planet_model.dart';
@@ -17,65 +19,36 @@ class _SolarSystemViewState extends State<SolarSystemView>
   late AnimationController _controller;
 
   final Map<String, double> initialAngles = {
-    'Mercury': 0.0,
-    'Venus': pi / 4,
-    'Earth': pi / 8,
-    'Mars': 3 * pi / 4,
-    'Jupiter': pi,
-    'Saturn': 5 * pi / 3,
-    'Uranus': 3 * pi / 5,
-    'Neptune': 7 * pi / 4,
+    'mercury': 0.0,
+    'venus': pi / 4,
+    'earth': pi / 8,
+    'mars': 3 * pi / 4,
+    'jupiter': pi,
+    'saturn': 5 * pi / 3,
+    'uranus': 3 * pi / 5,
+    'neptune': 7 * pi / 4,
   };
 
-  Map<String, double> getOrbitRadii(Size size) {
-    final screenRadius = min(size.width, size.height) / 2 - 50;
-    final radiiStep = screenRadius / 5.9;
-
-    return {
-      'Mercury': radiiStep * 1,
-      'Venus': radiiStep * 2,
-      'Earth': radiiStep * 3,
-      'Mars': radiiStep * 4,
-      'Jupiter': radiiStep * 5,
-      'Saturn': radiiStep * 6,
-      'Uranus': radiiStep * 7,
-      'Neptune': radiiStep * 8,
-    };
-  }
-
-  double getPlanetSize(String name) {
-    switch (name) {
-      case 'Jupiter':
-        return 60.0;
-      case 'Saturn':
-        return 75.0;
-      case 'Uranus':
-        return 55.0;
-      case 'Neptune':
-        return 50.0;
-      case 'Earth':
-        return 45.0;
-      case 'Venus':
-        return 40.0;
-      case 'Mars':
-        return 40.0;
-      case 'Mercury':
-        return 35.0;
-      default:
-        return 35.0;
-    }
-  }
+  final Map<String, int> planetNumbers = {
+    'mercury': 1,
+    'venus': 2,
+    'earth': 3,
+    'mars': 4,
+    'jupiter': 5,
+    'saturn': 6,
+    'uranus': 7,
+    'neptune': 8,
+  };
 
   @override
   void initState() {
     super.initState();
     _controller = AnimationController(
       vsync: this,
-      duration: const Duration(seconds: 20),
-    )
-      ..repeat();
+      duration: const Duration(seconds: 30), // Slower animation for better visibility
+    )..repeat();
     _controller.addListener(() {
-      setState(() {});
+      if (mounted) setState(() {}); // Ensure widget is still mounted
     });
   }
 
@@ -83,6 +56,35 @@ class _SolarSystemViewState extends State<SolarSystemView>
   void dispose() {
     _controller.dispose();
     super.dispose();
+  }
+
+  Map<String, double> getOrbitRadii(Size size) {
+    final screenRadius = min(size.width, size.height) / 2 - 50.w;
+    final radiiStep = screenRadius / 6.1;
+    return {
+      'mercury': radiiStep * 1,
+      'venus': radiiStep * 2,
+      'earth': radiiStep * 3,
+      'mars': radiiStep * 4,
+      'jupiter': radiiStep * 5,
+      'saturn': radiiStep * 6,
+      'uranus': radiiStep * 7,
+      'neptune': radiiStep * 8,
+    };
+  }
+
+  double getPlanetSize(String id) {
+    switch (id) {
+      case 'jupiter': return 50.w;
+      case 'saturn': return 75.w;
+      case 'uranus': return 50.w;
+      case 'neptune': return 45.w;
+      case 'earth': return 40.w;
+      case 'venus': return 35.w;
+      case 'mars': return 35.w;
+      case 'mercury': return 30.w;
+      default: return 30.w;
+    }
   }
 
   void _handlePlanetTap(BuildContext context, CelestialBody planet) {
@@ -95,105 +97,109 @@ class _SolarSystemViewState extends State<SolarSystemView>
     Navigator.pushNamed(context, '/planet-detail');
   }
 
+  void _changeLanguage() {
+    final currentLocale = Get.locale;
+    if (currentLocale?.languageCode == 'en') {
+      Get.updateLocale(const Locale('bn', 'BD'));
+    } else {
+      Get.updateLocale(const Locale('en', 'US'));
+    }
+    setState(() {}); // Force rebuild to update translations
+  }
+
   @override
   Widget build(BuildContext context) {
-    return Consumer<PlanetProvider>(
-      builder: (context, provider, child) {
-        return LayoutBuilder(
-          builder: (context, constraints) {
-            final size = Size(constraints.maxWidth, constraints.maxHeight);
-            final orbitRadii = getOrbitRadii(size);
-            final centerX = size.width / 2;
-            final centerY = size.height / 2;
+    return Scaffold(
+      floatingActionButton: FloatingActionButton(
+        onPressed: _changeLanguage,
+        child: Icon(Icons.language, size: 24.w),
+        mini: true,
+        backgroundColor: Colors.blue.withOpacity(0.7),
+      ),
+      body: Consumer<PlanetProvider>(
+        builder: (context, provider, child) {
+          return LayoutBuilder(
+            builder: (context, constraints) {
+              final size = Size(constraints.maxWidth, constraints.maxHeight);
+              final orbitRadii = getOrbitRadii(size);
+              final centerX = size.width / 2;
+              final centerY = size.height / 2;
 
-            final planetNames = [
-              'Mercury', 'Venus', 'Earth', 'Mars',
-              'Jupiter', 'Saturn', 'Uranus', 'Neptune'
-            ];
+              final orderedPlanets = provider.planets
+                  .where((p) => p.id != 'sun')
+                  .toList()
+                ..sort((a, b) => planetNumbers[a.id]!.compareTo(planetNumbers[b.id]!));
 
-            return Stack(
-              children: [
-                // Background (Static Stars)
-                StarField(),
-                // Solar System (with zoom and pan)
-                Positioned.fill(
-                  child: InteractiveViewer(
-                    boundaryMargin: const EdgeInsets.all(double.infinity),
-                    minScale: 0.2,
-                    maxScale: 5.5,
-                    child: Stack(
-                      children: [
-                        // Sun at the center
-                        Positioned(
-                          left: centerX - 15,
-                          top: centerY - 15,
-                          child: GestureDetector(
-                            onTap: () => print("clicked sun"),
-                            child: Container(
-                              width: 30,
-                              height: 30,
-                              child: Image.asset("assets/images/sun.png"),
-                            ),
-                          ),
-                        ),
-
-                        //Orbit lines with animation
-                        ...orbitRadii.entries.map((entry) {
-                          final radius = entry.value;
-                          return Positioned(
-                            left: centerX - radius,
-                            top: centerY - radius,
-                            child: Container(
-                              width: radius * 2,
-                              height: radius * 2,
-                              decoration: BoxDecoration(
-                                shape: BoxShape.circle,
-                                border: Border.all(
-                                  color: Colors.white.withOpacity(0.6),
-                                  width: 1,
-                                ),
-                                boxShadow: [
-                                  BoxShadow(
-                                    color: Colors.white.withOpacity(0.03),
-                                    blurRadius: 5,
-                                    spreadRadius: 1,
-                                  ),
-                                ],
+              return Stack(
+                children: [
+                  StarField(),
+                  Positioned.fill(
+                    child: InteractiveViewer(
+                      boundaryMargin: EdgeInsets.all(double.infinity),
+                      minScale: 0.2,
+                      maxScale: 5.5,
+                      child: Stack(
+                        children: [
+                          // Sun
+                          Positioned(
+                            left: centerX - 15.w,
+                            top: centerY - 15.w,
+                            child: GestureDetector(
+                              onTap: () => _handleSunTap(context, 'sun'),
+                              child: SizedBox(
+                                width: 30.w,
+                                height: 30.w,
+                                child: Image.asset("assets/images/sun.png"),
                               ),
                             ),
-                          );
-                        }).toList(),
+                          ),
 
-                        // Planets
-                        ...provider.planets
-                            .asMap()
-                            .entries
-                            .map((entry) {
-                          final index = entry.key;
-                          final planet = entry.value;
-                          final radius = orbitRadii[planet.name];
-                          final planetSize = getPlanetSize(planet.name);
-
-                          if (radius == null) return const SizedBox.shrink();
-
-                          final angle = _controller.value * 2 * pi +
-                              initialAngles[planet.name]!;
-                          final offsetX = centerX + radius * cos(angle);
-                          final offsetY = centerY + radius * sin(angle);
-
-                          return Positioned(
-                            left: offsetX - (planetSize / 2),
-                            top: offsetY - (planetSize / 2),
-                            child: GestureDetector(
-                              onTap: () => _handlePlanetTap(context, planet),
+                          // Orbits
+                          ...orbitRadii.entries.map((entry) {
+                            final radius = entry.value;
+                            return Positioned(
+                              left: centerX - radius,
+                              top: centerY - radius,
                               child: Container(
-                                width: planetSize,
-                                height: planetSize,
-                                padding: const EdgeInsets.all(4),
+                                width: radius * 2,
+                                height: radius * 2,
+                                decoration: BoxDecoration(
+                                  shape: BoxShape.circle,
+                                  border: Border.all(
+                                    color: Colors.white.withOpacity(0.6),
+                                    width: 1.w,
+                                  ),
+                                ),
+                              ),
+                            );
+                          }).toList(),
+
+                          // Planets
+                          ...orderedPlanets.map((planet) {
+                            final radius = orbitRadii[planet.id];
+                            final planetSize = getPlanetSize(planet.id);
+                            final planetNumber = planetNumbers[planet.id]!;
+
+                            if (radius == null) return const SizedBox.shrink();
+
+                            final angle = _controller.value * 2 * pi + initialAngles[planet.id]!;
+                            final offsetX = centerX + radius * cos(angle);
+                            final offsetY = centerY + radius * sin(angle);
+
+                            return Positioned(
+                              left: offsetX - (planetSize / 2),
+                              top: offsetY - (planetSize / 2),
+                              child: GestureDetector(
+                                onTap: () => _handlePlanetTap(context, planet),
                                 child: Column(
                                   mainAxisSize: MainAxisSize.min,
                                   children: [
-                                    Expanded(
+                                    Container(
+                                      width: planetSize,
+                                      height: planet.id == 'saturn' ? planetSize * 0.5 : planetSize,
+                                      decoration: BoxDecoration(
+                                        shape: planet.id == 'saturn' ? BoxShape.rectangle : BoxShape.circle,
+                                      ),
                                       child: Hero(
                                         tag: planet.id,
                                         child: Image.asset(
@@ -202,55 +208,58 @@ class _SolarSystemViewState extends State<SolarSystemView>
                                         ),
                                       ),
                                     ),
+                                    SizedBox(height: 4.h),
                                     Text(
-                                      '${index + 1}',
+                                      '$planetNumber',
                                       style: TextStyle(
                                         color: Colors.white,
-                                        fontSize: planetSize * 0.25,
+                                        fontSize: 14.sp,
+                                        fontWeight: FontWeight.bold,
                                       ),
-                                      textAlign: TextAlign.center,
                                     ),
                                   ],
                                 ),
                               ),
+                            );
+                          }).toList(),
+                        ],
+                      ),
+                    ),
+                  ),
+
+                  // Legend
+                  Positioned(
+                    top: 40.h,
+                    left: 10.w,
+                    child: Container(
+                      padding: EdgeInsets.all(8.w),
+                      decoration: BoxDecoration(
+                        color: Colors.black.withOpacity(0.5),
+                        borderRadius: BorderRadius.circular(10.r),
+                      ),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: orderedPlanets.map((planet) {
+                          return Padding(
+                            padding: EdgeInsets.symmetric(vertical: 2.h),
+                            child: Text(
+                              '${planetNumbers[planet.id]} = ${planet.name}',
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontSize: 12.sp,
+                              ),
                             ),
                           );
                         }).toList(),
-                      ],
+                      ),
                     ),
                   ),
-                ),
-
-
-                // Legend at the top describing number-planet mapping (Restored)
-                Positioned(
-                  top: 20,
-                  left: 10,
-                  right: 10,
-                  child: Container(
-                    padding: const EdgeInsets.all(8),
-                    color: Colors.transparent, // Removed background shade
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: planetNames.asMap().entries.map((entry) {
-                        final index = entry.key;
-                        final planetName = entry.value;
-                        return Text(
-                          '${index + 1} = $planetName',
-                          style: const TextStyle(
-                            color: Colors.white,
-                            fontSize: 14,
-                          ),
-                        );
-                      }).toList(),
-                    ),
-                  ),
-                ),
-              ],
-            );
-          },
-        );
-      },
+                ],
+              );
+            },
+          );
+        },
+      ),
     );
   }
 }
