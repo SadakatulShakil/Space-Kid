@@ -130,6 +130,22 @@ class LocalizationString extends Translations {
       'neptune_surface': 'Gaseous with icy core',
       'neptune_magnetic_field': 'Strong and tilted',
       'neptune_rings': '5 faint rings',
+
+      // description typography
+      'planet_name': 'Planet Name:',
+      'planet_type': 'Planet Type:',
+      'planet_atmosphere': 'Atmosphere:',
+      'planet_surface': 'Surface:',
+      'planet_magnetic_field': 'Magnetic Field:',
+      'planet_rings': 'Rings:',
+      'physical_characteristics': 'Physical Characteristics:',
+      'interesting_facts': 'Interesting Facts:',
+      'other_info': 'Other Information:',
+      'diameter': 'Diameter:',
+      'mass': 'Mass:',
+      'orbital_period': 'Orbital Period:',
+      'rotation_period': 'Rotation Period:',
+      'distance_from_sun': 'Distance from Sun:',
     },
     'bn_BD': {
       // Mercury
@@ -256,7 +272,26 @@ class LocalizationString extends Translations {
       'sun_core_temperature': '১.৫ কোটি °C',
       'sun_luminosity': '৩.৮২৮ x ১০^২৬ ওয়াট',
       'sun_composition': 'হাইড্রোজেন, হিলিয়াম, অক্সিজেন, কার্বন',
-      'sun_age': '৪.৬ বিলিয়ন বছর'
+      'sun_age': '৪.৬ বিলিয়ন বছর',
+
+      // description typography
+
+      'planet_name': 'গ্রহের নাম:',
+      'planet_type': 'গ্রহের প্রকার:',
+      'planet_atmosphere': 'বায়ুমণ্ডল:',
+      'planet_surface': 'ভুপৃষ্ঠ:',
+      'planet_magnetic_field': 'চৌম্বক ক্ষেত্র:',
+      'planet_rings': 'বলয়:',
+      'physical_characteristics': 'শারীরিক বৈশিষ্ট্য:',
+      'interesting_facts': 'আকর্ষণীয় তথ্য:',
+      'other_info': 'অন্যান্য তথ্য:',
+      'diameter': 'ব্যাস:',
+      'mass': 'ভর:',
+      'orbital_period': 'কক্ষপথের সময়কাল:',
+      'rotation_period': 'ঘূর্ণন সময়কাল:',
+      'distance_from_sun': 'সূর্য থেকে দূরত্ব:',
+
+
     }
   };
 }

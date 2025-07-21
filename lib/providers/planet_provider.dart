@@ -3,19 +3,60 @@ import 'package:get/get.dart';
 
 import '../models/planet_model.dart';
 
-class PlanetProvider with ChangeNotifier {
-  final List<CelestialBody> _planets = [];
+class PlanetController extends GetxController {
+  final currentLocale = Rx<Locale>(const Locale('bn', 'BD'));
+  final planets = <CelestialBody>[].obs;
+  final _selectedPlanet = Rxn<CelestialBody>();
+  final _isLoading = false.obs;
+  final settings = Rx<AppSettings>(AppSettings());
 
-  PlanetProvider() {
-    _planets.addAll(_getLocalizedPlanets());
+  CelestialBody? get selectedPlanet => _selectedPlanet.value;
+  bool get isLoading => _isLoading.value;
+
+  @override
+  void onInit() {
+    _loadPlanets();
+    super.onInit();
+    ever(currentLocale, (_) => _loadPlanets());
+  }
+
+  List<bool> selectedLanguage = [false, true].obs;
+
+  Future changeLanguage(int index) async {
+    for (int buttonIndex = 0; buttonIndex < selectedLanguage.length; buttonIndex++) {
+      if (buttonIndex == index) {
+        selectedLanguage[buttonIndex] = true;
+      } else {
+        selectedLanguage[buttonIndex] = false;
+      }
+    }
+    if(index == 0) {
+      await Get.updateLocale(Locale('en', 'US'));
+    } else {
+      await Get.updateLocale(Locale('bn', 'BD'));
+    }
+  }
+
+  void toggleLanguage() {
+    print('Current locale: ${currentLocale.value}');
+    final newLocale = currentLocale.value.languageCode == 'bn'
+        ? const Locale('en', 'US')
+        : const Locale('bn', 'BD');
+    Get.updateLocale(currentLocale.value);
+    planets.refresh();
+    print('Switching to: $newLocale');
+  }
+
+  void _loadPlanets() {
+    planets.assignAll(_getLocalizedPlanets());
   }
 
   List<CelestialBody> _getLocalizedPlanets() {
     return [
       CelestialBody(
         id: 'sun',
-        name: 'sun_name'.tr,
-        description: 'sun_description'.tr,
+        name: 'sun_name',
+        description: 'sun_description',
         imageUrl: 'assets/images/sun.png',
         diameter: 1391000,
         mass: 1.989e30,
@@ -24,25 +65,25 @@ class PlanetProvider with ChangeNotifier {
         rotationPeriod: 25.38,
         facts: [
           'sun_fact_1'.tr,
-          'sun_fact_2'.tr,
-          'sun_fact_3'.tr,
-          'sun_fact_4'.tr,
-          'sun_fact_5'.tr,
+          'sun_fact_2',
+          'sun_fact_3',
+          'sun_fact_4',
+          'sun_fact_5',
         ],
         characteristics: {
-          'type': 'sun_type'.tr,
-          'atmosphere': 'sun_atmosphere'.tr,
-          'surface': 'sun_surface'.tr,
-          'magnetic field': 'sun_magnetic_field'.tr,
-          'rings': 'sun_rings'.tr,
+          'type': 'sun_type',
+          'atmosphere': 'sun_atmosphere',
+          'surface': 'sun_surface',
+          'magnetic field': 'sun_magnetic_field',
+          'rings': 'sun_rings',
         },
         orbitRadius: 0,
         rotationSpeed: 0.0,
       ),
       CelestialBody(
         id: 'mercury',
-        name: 'mercury_name'.tr,
-        description: 'mercury_description'.tr,
+        name: 'mercury_name',
+        description: 'mercury_description',
         imageUrl: 'assets/images/mercury.png',
         diameter: 4879,
         mass: 3.285e23,
@@ -50,26 +91,26 @@ class PlanetProvider with ChangeNotifier {
         orbitalPeriod: 88,
         rotationPeriod: 58.6,
         facts: [
-          'mercury_fact_1'.tr,
-          'mercury_fact_2'.tr,
-          'mercury_fact_3'.tr,
-          'mercury_fact_4'.tr,
-          'mercury_fact_5'.tr,
+          'mercury_fact_1',
+          'mercury_fact_2',
+          'mercury_fact_3',
+          'mercury_fact_4',
+          'mercury_fact_5',
         ],
         characteristics: {
-          'type': 'mercury_type'.tr,
-          'atmosphere': 'mercury_atmosphere'.tr,
-          'surface': 'mercury_surface'.tr,
-          'magnetic field': 'mercury_magnetic_field'.tr,
-          'rings': 'mercury_rings'.tr,
+          'type': 'mercury_type',
+          'atmosphere': 'mercury_atmosphere',
+          'surface': 'mercury_surface',
+          'magnetic field': 'mercury_magnetic_field',
+          'rings': 'mercury_rings',
         },
         orbitRadius: 50,
         rotationSpeed: 0.08,
       ),
       CelestialBody(
         id: 'venus',
-        name: 'venus_name'.tr,
-        description: 'venus_description'.tr,
+        name: 'venus_name',
+        description: 'venus_description',
         imageUrl: 'assets/images/venus.png',
         diameter: 12104,
         mass: 4.867e24,
@@ -77,26 +118,26 @@ class PlanetProvider with ChangeNotifier {
         orbitalPeriod: 225,
         rotationPeriod: -243,
         facts: [
-          'venus_fact_1'.tr,
-          'venus_fact_2'.tr,
-          'venus_fact_3'.tr,
-          'venus_fact_4'.tr,
-          'venus_fact_5'.tr,
+          'venus_fact_1',
+          'venus_fact_2',
+          'venus_fact_3',
+          'venus_fact_4',
+          'venus_fact_5',
         ],
         characteristics: {
-          'type': 'venus_type'.tr,
-          'atmosphere': 'venus_atmosphere'.tr,
-          'surface': 'venus_surface'.tr,
-          'magnetic field': 'venus_magnetic_field'.tr,
-          'rings': 'venus_rings'.tr,
+          'type': 'venus_type',
+          'atmosphere': 'venus_atmosphere',
+          'surface': 'venus_surface',
+          'magnetic field': 'venus_magnetic_field',
+          'rings': 'venus_rings',
         },
         orbitRadius: 70,
         rotationSpeed: 0.07,
       ),
       CelestialBody(
         id: 'earth',
-        name: 'earth_name'.tr,
-        description: 'earth_description'.tr,
+        name: 'earth_name',
+        description: 'earth_description',
         imageUrl: 'assets/images/earth.png',
         diameter: 12742,
         mass: 5.972e24,
@@ -104,26 +145,26 @@ class PlanetProvider with ChangeNotifier {
         orbitalPeriod: 365.2,
         rotationPeriod: 1,
         facts: [
-          'earth_fact_1'.tr,
-          'earth_fact_2'.tr,
-          'earth_fact_3'.tr,
-          'earth_fact_4'.tr,
-          'earth_fact_5'.tr,
+          'earth_fact_1',
+          'earth_fact_2',
+          'earth_fact_3',
+          'earth_fact_4',
+          'earth_fact_5',
         ],
         characteristics: {
-          'type': 'earth_type'.tr,
-          'atmosphere': 'earth_atmosphere'.tr,
-          'surface': 'earth_surface'.tr,
-          'magnetic field': 'earth_magnetic_field'.tr,
-          'rings': 'earth_rings'.tr,
+          'type': 'earth_type',
+          'atmosphere': 'earth_atmosphere',
+          'surface': 'earth_surface',
+          'magnetic field': 'earth_magnetic_field',
+          'rings': 'earth_rings',
         },
         orbitRadius: 90,
         rotationSpeed: 0.1,
       ),
       CelestialBody(
         id: 'mars',
-        name: 'mars_name'.tr,
-        description: 'mars_description'.tr,
+        name: 'mars_name',
+        description: 'mars_description',
         imageUrl: 'assets/images/mars.png',
         diameter: 6779,
         mass: 6.39e23,
@@ -131,26 +172,26 @@ class PlanetProvider with ChangeNotifier {
         orbitalPeriod: 687,
         rotationPeriod: 1.03,
         facts: [
-          'mars_fact_1'.tr,
-          'mars_fact_2'.tr,
-          'mars_fact_3'.tr,
-          'mars_fact_4'.tr,
-          'mars_fact_5'.tr,
+          'mars_fact_1',
+          'mars_fact_2',
+          'mars_fact_3',
+          'mars_fact_4',
+          'mars_fact_5',
         ],
         characteristics: {
-          'type': 'mars_type'.tr,
-          'atmosphere': 'mars_atmosphere'.tr,
-          'surface': 'mars_surface'.tr,
-          'magnetic field': 'mars_magnetic_field'.tr,
-          'rings': 'mars_rings'.tr,
+          'type': 'mars_type',
+          'atmosphere': 'mars_atmosphere',
+          'surface': 'mars_surface',
+          'magnetic field': 'mars_magnetic_field',
+          'rings': 'mars_rings',
         },
         orbitRadius: 110,
         rotationSpeed: 0.11,
       ),
       CelestialBody(
         id: 'jupiter',
-        name: 'jupiter_name'.tr,
-        description: 'jupiter_description'.tr,
+        name: 'jupiter_name',
+        description: 'jupiter_description',
         imageUrl: 'assets/images/jupiter.png',
         diameter: 139820,
         mass: 1.898e27,
@@ -158,26 +199,26 @@ class PlanetProvider with ChangeNotifier {
         orbitalPeriod: 4333,
         rotationPeriod: 0.41,
         facts: [
-          'jupiter_fact_1'.tr,
-          'jupiter_fact_2'.tr,
-          'jupiter_fact_3'.tr,
-          'jupiter_fact_4'.tr,
-          'jupiter_fact_5'.tr,
+          'jupiter_fact_1',
+          'jupiter_fact_2',
+          'jupiter_fact_3',
+          'jupiter_fact_4',
+          'jupiter_fact_5',
         ],
         characteristics: {
-          'type': 'jupiter_type'.tr,
-          'atmosphere': 'jupiter_atmosphere'.tr,
-          'surface': 'jupiter_surface'.tr,
-          'magnetic field': 'jupiter_magnetic_field'.tr,
-          'rings': 'jupiter_rings'.tr,
+          'type': 'jupiter_type',
+          'atmosphere': 'jupiter_atmosphere',
+          'surface': 'jupiter_surface',
+          'magnetic field': 'jupiter_magnetic_field',
+          'rings': 'jupiter_rings',
         },
         orbitRadius: 140,
         rotationSpeed: 0.2,
       ),
       CelestialBody(
         id: 'saturn',
-        name: 'saturn_name'.tr,
-        description: 'saturn_description'.tr,
+        name: 'saturn_name',
+        description: 'saturn_description',
         imageUrl: 'assets/images/satrun.png',
         diameter: 116460,
         mass: 5.683e26,
@@ -185,26 +226,26 @@ class PlanetProvider with ChangeNotifier {
         orbitalPeriod: 10759,
         rotationPeriod: 0.45,
         facts: [
-          'saturn_fact_1'.tr,
-          'saturn_fact_2'.tr,
-          'saturn_fact_3'.tr,
-          'saturn_fact_4'.tr,
-          'saturn_fact_5'.tr,
+          'saturn_fact_1',
+          'saturn_fact_2',
+          'saturn_fact_3',
+          'saturn_fact_4',
+          'saturn_fact_5',
         ],
         characteristics: {
-          'type': 'saturn_type'.tr,
-          'atmosphere': 'saturn_atmosphere'.tr,
-          'surface': 'saturn_surface'.tr,
-          'magnetic field': 'saturn_magnetic_field'.tr,
-          'rings': 'saturn_rings'.tr,
+          'type': 'saturn_type',
+          'atmosphere': 'saturn_atmosphere',
+          'surface': 'saturn_surface',
+          'magnetic field': 'saturn_magnetic_field',
+          'rings': 'saturn_rings',
         },
         orbitRadius: 170,
         rotationSpeed: 0.18,
       ),
       CelestialBody(
         id: 'uranus',
-        name: 'uranus_name'.tr,
-        description: 'uranus_description'.tr,
+        name: 'uranus_name',
+        description: 'uranus_description',
         imageUrl: 'assets/images/urenus.png',
         diameter: 50724,
         mass: 8.681e25,
@@ -212,26 +253,26 @@ class PlanetProvider with ChangeNotifier {
         orbitalPeriod: 30687,
         rotationPeriod: -0.72,
         facts: [
-          'uranus_fact_1'.tr,
-          'uranus_fact_2'.tr,
-          'uranus_fact_3'.tr,
-          'uranus_fact_4'.tr,
-          'uranus_fact_5'.tr,
+          'uranus_fact_1',
+          'uranus_fact_2',
+          'uranus_fact_3',
+          'uranus_fact_4',
+          'uranus_fact_5',
         ],
         characteristics: {
-          'type': 'uranus_type'.tr,
-          'atmosphere': 'uranus_atmosphere'.tr,
-          'surface': 'uranus_surface'.tr,
-          'magnetic field': 'uranus_magnetic_field'.tr,
-          'rings': 'uranus_rings'.tr,
+          'type': 'uranus_type',
+          'atmosphere': 'uranus_atmosphere',
+          'surface': 'uranus_surface',
+          'magnetic field': 'uranus_magnetic_field',
+          'rings': 'uranus_rings',
         },
         orbitRadius: 200,
         rotationSpeed: 0.14,
       ),
       CelestialBody(
         id: 'neptune',
-        name: 'neptune_name'.tr,
-        description: 'neptune_description'.tr,
+        name: 'neptune_name',
+        description: 'neptune_description',
         imageUrl: 'assets/images/naptune.png',
         diameter: 49244,
         mass: 1.024e26,
@@ -239,18 +280,18 @@ class PlanetProvider with ChangeNotifier {
         orbitalPeriod: 60190,
         rotationPeriod: 0.67,
         facts: [
-          'neptune_fact_1'.tr,
-          'neptune_fact_2'.tr,
-          'neptune_fact_3'.tr,
-          'neptune_fact_4'.tr,
-          'neptune_fact_5'.tr,
+          'neptune_fact_1',
+          'neptune_fact_2',
+          'neptune_fact_3',
+          'neptune_fact_4',
+          'neptune_fact_5',
         ],
         characteristics: {
-          'type': 'neptune_type'.tr,
-          'atmosphere': 'neptune_atmosphere'.tr,
-          'surface': 'neptune_surface'.tr,
-          'magnetic field': 'neptune_magnetic_field'.tr,
-          'rings': 'neptune_rings'.tr,
+          'type': 'neptune_type',
+          'atmosphere': 'neptune_atmosphere',
+          'surface': 'neptune_surface',
+          'magnetic field': 'neptune_magnetic_field',
+          'rings': 'neptune_rings',
         },
         orbitRadius: 230,
         rotationSpeed: 0.12,
@@ -258,28 +299,16 @@ class PlanetProvider with ChangeNotifier {
     ];
   }
 
-  CelestialBody? _selectedPlanet;
-  bool _isLoading = false;
-
-  List<CelestialBody> get planets => _planets;
-  CelestialBody? get selectedPlanet => _selectedPlanet;
-  bool get isLoading => _isLoading;
-
   Future<void> selectPlanet(String id) async {
-    _isLoading = true;
-    notifyListeners();
+    _isLoading.value = true;
     try {
-      _selectedPlanet = _planets.firstWhere((planet) => planet.id == id);
+      _selectedPlanet.value = planets.firstWhere((planet) => planet.id == id);
     } finally {
-      _isLoading = false;
-      notifyListeners();
+      _isLoading.value = false;
     }
   }
 
-  AppSettings settings = AppSettings();
-
   void updateSettings(AppSettings newSettings) {
-    settings = newSettings;
-    notifyListeners();
+    settings.value = newSettings;
   }
 }
