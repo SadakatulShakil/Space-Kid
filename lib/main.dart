@@ -8,7 +8,6 @@ import 'package:planet_plus/services/LocalizationString.dart';
 import 'package:planet_plus/services/update_checker.dart';
 
 import 'config/app_routes.dart';
-import 'config/theme.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -34,7 +33,10 @@ class MyApp extends StatelessWidget {
       builder: (_, child) {
         return GetMaterialApp(
           title: 'Solar System Explorer',
-          theme: AppTheme.darkTheme,
+          theme: ThemeData(
+            primarySwatch: Colors.blue,
+            visualDensity: VisualDensity.adaptivePlatformDensity,
+          ),
           debugShowCheckedModeBanner: false,
           initialBinding: AppBindings(), // Initialize controllers here
           home: UpdateGatekeeper(),
@@ -56,8 +58,5 @@ class AppBindings extends Bindings {
     Get.lazyPut(() => PlanetController(), fenix: true);
     Get.lazyPut(() => VoicePlayerController(), fenix: true);
 
-    // Or use Put for immediate initialization
-    // Get.put(PlanetController());
-    // Get.put(VoicePlayerController());
   }
 }

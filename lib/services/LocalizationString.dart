@@ -268,11 +268,11 @@ class LocalizationString extends Translations {
       'sun_fact_3': 'প্রতি সেকেন্ডে সূর্য প্রায় ৬০০ মিলিয়ন টন হাইড্রোজেন হিলিয়ামে রূপান্তর করে।',
       'sun_fact_4': 'সূর্যের পৃষ্ঠ তাপমাত্রা প্রায় ৫,৫০০ ডিগ্রি সেলসিয়াস।',
       'sun_fact_5': 'সূর্যের বয়স প্রায় ৪.৬ বিলিয়ন বছর এবং এটি এখনো মূল অনুক্রমে আছে।',
-      'sun_surface_temperature': '৫,৫০০ °C',
-      'sun_core_temperature': '১.৫ কোটি °C',
-      'sun_luminosity': '৩.৮২৮ x ১০^২৬ ওয়াট',
-      'sun_composition': 'হাইড্রোজেন, হিলিয়াম, অক্সিজেন, কার্বন',
-      'sun_age': '৪.৬ বিলিয়ন বছর',
+      'sun_type': 'তারা',
+      'sun_atmosphere': 'করোনা, ক্রোমোস্ফিয়ার',
+      'sun_surface': 'ফটোস্ফিয়ার',
+      'sun_magnetic_field': 'সৌর চৌম্বক ক্ষেত্র',
+      'sun_rings': 'নেই',
 
       // description typography
 

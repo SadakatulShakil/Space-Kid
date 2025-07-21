@@ -20,13 +20,13 @@ class _SolarSystemViewState extends State<SolarSystemView>
 
   final Map<String, double> initialAngles = {
     'mercury': 0.0,
-    'venus': pi / 4,
-    'earth': pi / 8,
-    'mars': 3 * pi / 4,
-    'jupiter': pi,
-    'saturn': 5 * pi / 3,
-    'uranus': 3 * pi / 5,
-    'neptune': 7 * pi / 4,
+    'venus': 1.5 * pi / 4,
+    'earth': 3 * pi / 4,
+    'mars': pi,
+    'jupiter': 4 * pi / 3,
+    'saturn': 6 * pi / 3.5,
+    'uranus': 7.5 * pi / 4,
+    'neptune': 8.5 * pi / 4,
   };
 
   final Map<String, int> planetNumbers = {
@@ -74,14 +74,14 @@ class _SolarSystemViewState extends State<SolarSystemView>
 
   double getPlanetSize(String id) {
     switch (id) {
-      case 'jupiter': return 50.w;
-      case 'saturn': return 75.w;
+      case 'jupiter': return 45.w;
+      case 'saturn': return 68.w;
       case 'uranus': return 50.w;
-      case 'neptune': return 45.w;
-      case 'earth': return 40.w;
-      case 'venus': return 35.w;
-      case 'mars': return 35.w;
-      case 'mercury': return 30.w;
+      case 'neptune': return 50.w;
+      case 'earth': return 45.w;
+      case 'venus': return 32.w;
+      case 'mars': return 38.w;
+      case 'mercury': return 25.w;
       default: return 30.w;
     }
   }
@@ -92,6 +92,7 @@ class _SolarSystemViewState extends State<SolarSystemView>
   }
 
   void _handleSunTap(String id) {
+    print('Sun printed');
     planetController.selectPlanet(id);
     Get.toNamed('/planet-detail');
   }
@@ -135,21 +136,28 @@ class _SolarSystemViewState extends State<SolarSystemView>
               Positioned.fill(
                 child: InteractiveViewer(
                   boundaryMargin: EdgeInsets.all(double.infinity),
-                  minScale: 0.2,
-                  maxScale: 5.5,
+                  minScale: 0.05,
+                  maxScale: 6.0,
                   child: Stack(
                     children: [
                       // Sun
                       Positioned(
-                        left: centerX - 15.w,
-                        top: centerY - 15.w,
-                        child: GestureDetector(
-                          onTap: () => _handleSunTap('sun'),
-                          child: SizedBox(
-                            width: 30.w,
-                            height: 30.w,
-                            child: Image.asset("assets/images/sun.png"),
+                        left: centerX - 17.w,
+                        top: centerY - 17.w,
+                        child: Container(
+                          decoration: BoxDecoration(
+                            shape: BoxShape.circle,
+                            boxShadow: [
+                              BoxShadow(
+                                color: Colors.yellow.withOpacity(0.5),
+                                blurRadius: 100.w,
+                                spreadRadius: 50.w,
+                              ),
+                            ],
                           ),
+                          width: 34.w,
+                          height: 34.w,
+                          child: Image.asset("assets/images/sun.png"),
                         ),
                       ),
 
@@ -190,8 +198,8 @@ class _SolarSystemViewState extends State<SolarSystemView>
                           top: offsetY - (planetSize / 2),
                           child: GestureDetector(
                             onTap: () => _handlePlanetTap(planet),
-                            child: Column(
-                              mainAxisSize: MainAxisSize.min,
+                            child: Stack(
+                              alignment: Alignment.center,
                               children: [
                                 Container(
                                   width: planetSize,
@@ -207,15 +215,15 @@ class _SolarSystemViewState extends State<SolarSystemView>
                                     ),
                                   ),
                                 ),
-                                SizedBox(
-                                  width: planetSize,
-                                  child: Text(
-                                    '$planetNumber',
-                                    textAlign: TextAlign.center,
-                                    style: TextStyle(
-                                      color: Colors.white,
-                                      fontSize: 14.sp,
-                                      fontWeight: FontWeight.bold,
+                                Positioned.fill(
+                                  child: Center(
+                                    child: Text(
+                                      '$planetNumber',
+                                      style: TextStyle(
+                                        color: Colors.white,
+                                        fontSize: 14.sp,
+                                        fontWeight: FontWeight.bold,
+                                      ),
                                     ),
                                   ),
                                 ),
