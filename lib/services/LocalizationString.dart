@@ -146,6 +146,38 @@ class LocalizationString extends Translations {
       'orbital_period': 'Orbital Period:',
       'rotation_period': 'Rotation Period:',
       'distance_from_sun': 'Distance from Sun:',
+      // galaxy part
+      'our_galaxy': 'Our Galaxy',
+      'title': 'The Milky Way Galaxy',
+      'intro': 'The Milky Way Galaxy is the galaxy that contains our solar system. It is one of billions of galaxies in the universe.',
+
+      'structure_title': '1. Structure and Shape',
+      'spiral': '• Spiral Galaxy: The Milky Way is classified as a barred spiral galaxy with a disk-like structure and distinct spiral arms.',
+      'size': '• Size: Spans about 100,000 light-years in diameter and contains between 100 to 400 billion stars.',
+      'center': '• Galactic Center: At its center is a supermassive black hole called Sagittarius A*.',
+
+      'location_title': '2. Location in the Universe',
+      'location_text': 'The Milky Way is part of the Local Group of galaxies, which includes the Andromeda Galaxy and the Triangulum Galaxy.',
+
+      'solar_system_title': '3. Solar System’s Location',
+      'solar_system_text': 'Our solar system is located in the Orion Arm, about 27,000 light-years from the galactic center.',
+
+      'rotation_title': '4. Rotation and Movement',
+      'galactic_year': '• Galactic Year: Our solar system takes about 225–250 million years to orbit the galaxy\'s center.',
+      'galaxy_speed': '• The galaxy is moving at around 600 km/s relative to the cosmic microwave background.',
+
+      'components_title': '5. Components',
+      'stars_planets': '• Stars and Planets: Billions of stars with their own planetary systems exist in the Milky Way.',
+      'nebulae': '• Nebulae: Massive clouds of gas and dust are star-forming regions in the galaxy.',
+      'dark_matter': '• Dark Matter: The Milky Way contains a significant amount of invisible dark matter.',
+
+      'age_title': '6. Age',
+      'age_text': 'The Milky Way is approximately 13.6 billion years old, forming shortly after the Big Bang.',
+
+      'satellites_title': '7. Satellite Galaxies',
+      'satellites_text': 'The Milky Way has several smaller satellite galaxies, such as the Large Magellanic Cloud (LMC) and Small Magellanic Cloud (SMC).',
+
+      'resources': 'Resources',
     },
     'bn_BD': {
       // Mercury
@@ -291,7 +323,38 @@ class LocalizationString extends Translations {
       'rotation_period': 'ঘূর্ণন সময়কাল:',
       'distance_from_sun': 'সূর্য থেকে দূরত্ব:',
 
+      // galaxy part
+      'our_galaxy': 'আমাদের গ্যালাক্সি',
+      'title': 'মিল্কিওয়ে গ্যালাক্সি',
+      'intro': 'মিল্কিওয়ে গ্যালাক্সি হলো সেই গ্যালাক্সি যা আমাদের সৌরজগতকে ধারণ করে। এটি মহাবিশ্বের লক্ষ কোটি গ্যালাক্সির মধ্যে একটি।',
 
+      'structure_title': '১. গঠন এবং আকৃতি',
+      'spiral': '• সর্পিল গ্যালাক্সি: মিল্কিওয়ে একটি বার্ড স্পাইরাল গ্যালাক্সি যার ডিস্ক-আকৃতির গঠন এবং স্পষ্ট সর্পিল বাহু রয়েছে।',
+      'size': '• আকার: প্রায় ১,০০,০০০ আলোকবর্ষ বিস্তৃত এবং এতে ১০০ থেকে ৪০০ বিলিয়ন তারকা রয়েছে।',
+      'center': '• গ্যালাকটিক কেন্দ্র: এর কেন্দ্রে আছে একটি সুপারম্যাসিভ ব্ল্যাক হোল যার নাম স্যাজিটারিয়াস A*।',
+
+      'location_title': '২. মহাবিশ্বে অবস্থান',
+      'location_text': 'মিল্কিওয়ে স্থানীয় গোষ্ঠীর অন্তর্ভুক্ত, যার মধ্যে আছে অ্যান্ড্রোমিডা এবং ট্রায়াঙ্গুলাম গ্যালাক্সি।',
+
+      'solar_system_title': '৩. সৌরজগতের অবস্থান',
+      'solar_system_text': 'আমাদের সৌরজগত অরিয়ন বাহুতে অবস্থিত, যা গ্যালাকটিক কেন্দ্র থেকে প্রায় ২৭,০০০ আলোকবর্ষ দূরে।',
+
+      'rotation_title': '৪. ঘূর্ণন ও গতি',
+      'galactic_year': '• গ্যালাকটিক বর্ষ: সৌরজগত গ্যালাক্সির কেন্দ্রকে একবার প্রদক্ষিণ করতে প্রায় ২২৫–২৫০ মিলিয়ন বছর সময় নেয়।',
+      'galaxy_speed': '• গ্যালাক্সি প্রতি সেকেন্ডে প্রায় ৬০০ কিমি গতিতে চলে যাচ্ছে মহাজাগতিক মাইক্রোওয়েভ পটভূমির তুলনায়।',
+
+      'components_title': '৫. উপাদানসমূহ',
+      'stars_planets': '• তারা ও গ্রহ: মিল্কিওয়েতে লক্ষ কোটি তারকা ও তাদের গ্রহীয় ব্যবস্থা রয়েছে।',
+      'nebulae': '• নেবুলা: গ্যাস ও ধুলোর বিশাল মেঘ যা তারার জন্মস্থান।',
+      'dark_matter': '• ডার্ক ম্যাটার: এতে অদৃশ্য ডার্ক ম্যাটার প্রচুর পরিমাণে রয়েছে।',
+
+      'age_title': '৬. বয়স',
+      'age_text': 'মিল্কিওয়ে প্রায় ১৩.৬ বিলিয়ন বছর পুরোনো, যা বিগ ব্যাংয়ের কিছু পরেই গঠিত হয়েছে।',
+
+      'satellites_title': '৭. উপগ্রহ গ্যালাক্সিসমূহ',
+      'satellites_text': 'মিল্কিওয়েতে কিছু ছোট উপগ্রহ গ্যালাক্সি রয়েছে যেমন লার্জ ম্যাজেলানিক ক্লাউড (LMC) এবং স্মল ম্যাজেলানিক ক্লাউড (SMC)।',
+
+      'resources': 'তথ্যসূত্র',
     }
   };
 }

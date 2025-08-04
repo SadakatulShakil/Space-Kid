@@ -1,108 +1,211 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:flutter_html/flutter_html.dart';
+import 'package:flutter_tts/flutter_tts.dart';
+import 'package:get/get.dart';
+import 'package:lottie/lottie.dart';
 
-class GalaxyScreen extends StatelessWidget {
+import '../../providers/voice_player_provider.dart';
+import '../main/widgets/player_widget.dart';
+
+class GalaxyScreen extends StatefulWidget {
   const GalaxyScreen({super.key});
+
+  @override
+  State<GalaxyScreen> createState() => _GalaxyScreenState();
+}
+
+class _GalaxyScreenState extends State<GalaxyScreen> {
+  late FlutterTts _flutterTts;
+  final _isSheetVisible = false.obs; // Changed to obs
+  final VoicePlayerController _voiceController = Get.put(VoicePlayerController());
+
+
+  void showVoicePlayerSheet() {
+    Get.bottomSheet(
+      const Padding(
+        padding: EdgeInsets.all(16),
+        child: VoicePlayerWidget(),
+      ),
+    ).whenComplete(() {
+      _isSheetVisible.value = false;
+    });
+
+    _isSheetVisible.value = true;
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    _flutterTts = FlutterTts();
+  }
+
+  @override
+  void dispose() {
+    _voiceController.stop();
+    _flutterTts.stop();
+    super.dispose();
+  }
+
+  Widget _sectionTitle(String text, BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 12.0),
+      child: Text(
+        text.tr,
+        style: Theme.of(context).textTheme.titleMedium?.copyWith(
+          fontWeight: FontWeight.bold,
+          fontSize: 18,
+        ),
+      ),
+    );
+  }
+
+  Widget _sectionParagraph(String text, {double bottom = 10}) {
+    return Padding(
+      padding: EdgeInsets.only(bottom: bottom),
+      child: Text(
+        text.tr,
+        style: const TextStyle(
+          fontSize: 15,
+          height: 1.6,
+        ),
+      ),
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('Our Galaxy')),
+      appBar: AppBar(
+        title: Text('our_galaxy'.tr),
+        actions: [
+  Obx(() {
+    return _voiceController.isPlaying.value
+      ? Material(
+          color: Colors.transparent,
+          child: InkWell(
+            borderRadius: BorderRadius.circular(20),
+            onTap: () {
+              if (_isSheetVisible.value) {
+                Get.back();
+                _isSheetVisible.value = false;
+              } else {
+                showVoicePlayerSheet();
+              }
+            },
+            child: SizedBox(
+              width: 45,
+              height: 45,
+              child: Lottie.asset(
+                'assets/json/voice.json',
+                repeat: true,
+                animate: true,
+              ),
+            ),
+          ),
+        )
+      : IconButton(
+          icon: const Icon(Icons.volume_up),
+          onPressed: () {
+            if (_voiceController.isPlaying.value) {
+              _voiceController.pause();
+            } else {
+              _voiceController.setText(
+                'title'.tr + '. ' +
+                    'intro'.tr + '. ' +
+                    'structure_title'.tr + '. ' +
+                    'spiral'.tr + '. ' +
+                    'size'.tr + '. ' +
+                    'center'.tr + '. ' +
+                    'location_title'.tr + '. ' +
+                    'location_text'.tr + '. ' +
+                    'solar_system_title'.tr + '. ' +
+                    'solar_system_text'.tr + '. ' +
+                    'rotation_title'.tr + '. ' +
+                    'galactic_year'.tr + '. ' +
+                    'galaxy_speed'.tr + '. ' +
+                    'components_title'.tr + '. ' +
+                    'stars_planets'.tr + '. ' +
+                    'nebulae'.tr + '. ' +
+                    'dark_matter'.tr + '. ' +
+                    'age_title'.tr + '. ' +
+                    'age_text'.tr + '. ' +
+                    'satellites_title'.tr + '. ' +
+                    'satellites_text'.tr,
+              );
+              _voiceController.play();
+            }
+          },
+        );
+})
+        ],
+      ),
       body: SingleChildScrollView(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Image.asset('assets/images/galaxy.jpg'),
-            const SizedBox(height: 16),
-            Padding(
-              padding: const EdgeInsets.all(16.0),
-              child: Text(
-                'The Milky Way Galaxy',
-                style: Theme.of(context).textTheme.headlineMedium,
-              ),
-            ),
-            const SizedBox(height: 8),
-            Padding(
-              padding: const EdgeInsets.all(16.0),
-              child: Html(
-                data: """
-            <div style="font-family: Arial, sans-serif;">
-              <p>The <strong>Milky Way Galaxy</strong> is the galaxy that contains our solar system. It is one of billions of galaxies in the universe.</p>
-              
-              <h2>1. Structure and Shape</h2>
-              <ul>
-                <li><strong>Spiral Galaxy:</strong> The Milky Way is classified as a barred spiral galaxy with a disk-like structure and distinct spiral arms.</li>
-                <li><strong>Size:</strong> Spans about <em>100,000 light-years</em> in diameter and contains between <em>100 to 400 billion stars</em>.</li>
-                <li><strong>Galactic Center:</strong> At its center is a supermassive black hole called <em>Sagittarius A*</em>.</li>
-              </ul>
-
-              <h2>2. Location in the Universe</h2>
-              <p>The Milky Way is part of the <strong>Local Group</strong> of galaxies, which includes the Andromeda Galaxy and the Triangulum Galaxy.</p>
-
-              <h2>3. Solar System’s Location</h2>
-              <p>Our solar system is located in the <em>Orion Arm</em>, about 27,000 light-years from the galactic center.</p>
-
-              <h2>4. Rotation and Movement</h2>
-              <ul>
-                <li><strong>Galactic Year:</strong> Our solar system takes about <em>225-250 million years</em> to orbit the galaxy's center.</li>
-                <li>The galaxy is moving at around <em>600 km/s</em> relative to the cosmic microwave background.</li>
-              </ul>
-
-              <h2>5. Components</h2>
-              <ul>
-                <li><strong>Stars and Planets:</strong> Billions of stars with their own planetary systems exist in the Milky Way.</li>
-                <li><strong>Nebulae:</strong> Massive clouds of gas and dust are star-forming regions in the galaxy.</li>
-                <li><strong>Dark Matter:</strong> The Milky Way contains a significant amount of invisible dark matter.</li>
-              </ul>
-
-              <h2>6. Age</h2>
-              <p>The Milky Way is approximately <em>13.6 billion years old</em>, forming shortly after the Big Bang.</p>
-
-              <h2>7. Satellite Galaxies</h2>
-              <p>The Milky Way has several smaller <strong>satellite galaxies</strong>, such as the <em>Large Magellanic Cloud (LMC)</em> and <em>Small Magellanic Cloud (SMC)</em>.</p>
-            </div>
-            """,
-              ),
-            ),
-            const SizedBox(height: 8),
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Text(
-                'Resources',
-                style: const TextStyle(
-                  fontSize: 18,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
+            Image.asset(
+              'assets/gif/galaxy.gif',
+              height: 200,
+              width: double.infinity,
+              fit: BoxFit.cover,
             ),
             Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Row(
+              padding:
+              const EdgeInsets.symmetric(horizontal: 20.0, vertical: 16.0),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const Icon(Icons.link, color: Colors.teal),
-                  const SizedBox(width: 8),
-                  Expanded( // Ensures the text doesn't overflow
-                    child: Text(
-                      'https://en.wikipedia.org/wiki/Milky_Way',
-                      style: const TextStyle(fontSize: 16, color: Colors.indigoAccent),
-                      overflow: TextOverflow.ellipsis, // Adds ellipsis (...) for long text
-                    ),
+                  Text(
+                    'title'.tr,
+                    style: Theme.of(context)
+                        .textTheme
+                        .headlineSmall
+                        ?.copyWith(fontWeight: FontWeight.bold),
                   ),
-                  const SizedBox(width: 8),
-                  GestureDetector(
-                    onTap: () {
-                      Clipboard.setData(ClipboardData(text: 'https://en.wikipedia.org/wiki/Milky_Way')); // Copy to clipboard
-                      ScaffoldMessenger.of(context).showSnackBar(
-                        SnackBar(content: Text('Copied to clipboard: https://en.wikipedia.org/wiki/Milky_Way')),
-                      );
-                    },
-                    child: const Icon(Icons.copy, color: Colors.white70),
+                  const SizedBox(height: 10),
+                  _sectionParagraph('intro'),
+
+                  _sectionTitle('structure_title', context),
+                  _sectionParagraph('spiral'),
+                  _sectionParagraph('size'),
+                  _sectionParagraph('center'),
+
+                  _sectionTitle('location_title', context),
+                  _sectionParagraph('location_text'),
+
+                  _sectionTitle('solar_system_title', context),
+                  _sectionParagraph('solar_system_text'),
+
+                  _sectionTitle('rotation_title', context),
+                  _sectionParagraph('galactic_year'),
+                  _sectionParagraph('galaxy_speed'),
+
+                  _sectionTitle('components_title', context),
+                  _sectionParagraph('stars_planets'),
+                  _sectionParagraph('nebulae'),
+                  _sectionParagraph('dark_matter'),
+
+                  _sectionTitle('age_title', context),
+                  _sectionParagraph('age_text'),
+
+                  _sectionTitle('satellites_title', context),
+                  _sectionParagraph('satellites_text'),
+
+                  const SizedBox(height: 16),
+                  Text(
+                    'resources'.tr,
+                    style: const TextStyle(fontWeight: FontWeight.bold),
+                  ),
+                  const SizedBox(height: 4),
+                  Text(
+                    'https://en.wikipedia.org/wiki/Milky_Way',
+                    style: const TextStyle(
+                      color: Colors.blue,
+                      decoration: TextDecoration.underline,
+                    ),
                   ),
                 ],
               ),
             ),
-            // Add more galaxy information...
           ],
         ),
       ),

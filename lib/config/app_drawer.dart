@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
 import 'package:share_plus/share_plus.dart';
 
 import 'app_config.dart';
@@ -42,46 +44,40 @@ class AppDrawer extends StatelessWidget {
             ),
             _buildDrawerItem(
               context: context,
-              icon: Icons.home,
-              title: 'Home',
-              onTap: () => Navigator.pushReplacementNamed(context, '/'),
-            ),
-            _buildDrawerItem(
-              context: context,
               icon: Icons.language,
               title: 'Galaxy',
-              onTap: () => Navigator.pushNamed(context, '/galaxy'),
+              onTap: () => Get.toNamed('/galaxy'),
             ),
             _buildDrawerItem(
               context: context,
               icon: Icons.stars,
               title: 'Sun & Moon',
-              onTap: () => Navigator.pushNamed(context, '/sun&moon'),
+              onTap: () => Get.toNamed('/sun&moon'),
             ),
             _buildDrawerItem(
               context: context,
               icon: Icons.rocket,
               title: 'Space Stations',
-              onTap: () => Navigator.pushNamed(context, '/space-stations'),
+              onTap: () => Get.toNamed('/space-stations'),
             ),
             _buildDrawerItem(
               context: context,
               icon: Icons.history,
               title: 'Rocket History',
-              onTap: () => Navigator.pushNamed(context, '/rocket-history'),
+              onTap: () => Get.toNamed('/rocket-history'),
             ),
             _buildDrawerItem(
               context: context,
               icon: Icons.science,
               title: 'About NASA',
-              onTap: () => Navigator.pushNamed(context, '/about-nasa'),
+              onTap: () => Get.toNamed('/about-nasa'),
             ),
             const Divider(color: Colors.white24),
             _buildDrawerItem(
               context: context,
               icon: Icons.info,
               title: 'About',
-              onTap: () => Navigator.pushNamed(context, '/about'),
+              onTap: () => Get.toNamed('/about'),
             ),
             _buildDrawerItem(
               context: context,

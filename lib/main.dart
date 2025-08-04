@@ -33,10 +33,7 @@ class MyApp extends StatelessWidget {
       builder: (_, child) {
         return GetMaterialApp(
           title: 'Solar System Explorer',
-          theme: ThemeData(
-            primarySwatch: Colors.blue,
-            visualDensity: VisualDensity.adaptivePlatformDensity,
-          ),
+          theme: ThemeData.dark(),
           debugShowCheckedModeBanner: false,
           initialBinding: AppBindings(), // Initialize controllers here
           home: UpdateGatekeeper(),
