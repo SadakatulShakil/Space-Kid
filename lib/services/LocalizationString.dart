@@ -178,6 +178,78 @@ class LocalizationString extends Translations {
       'satellites_text': 'The Milky Way has several smaller satellite galaxies, such as the Large Magellanic Cloud (LMC) and Small Magellanic Cloud (SMC).',
 
       'resources': 'Resources',
+
+      'sun&moon': 'Sun & Moon',
+      // sun part
+      'sun': 'Sun',
+      'sun_title': 'Our Sun',
+      'sun_intro': 'The Sun is the central star of the solar system. It is a massive sphere of gas composed mainly of hydrogen and helium, and it is the primary source of energy for life on Earth.',
+
+      'sun_structure_title': '1. Structure',
+      'core': '• Core: Nuclear fusion occurs at the Sun\'s core, where hydrogen atoms are converted into helium, producing enormous energy.',
+      'radiative': '• Radiative Zone: Energy slowly transfers outward through radiation.',
+      'convective': '• Convective Zone: Hot gases circulate to transfer energy to the surface.',
+      'surface': '• Surface (Photosphere): This is the layer from which we see the Sun’s light.',
+
+      'features_title': '2. Features',
+      'sun_size': '• Size: The Sun’s diameter is about 1.4 million km, roughly 109 times that of Earth.',
+      'sun_mass': '• Mass: The Sun contains about 99.8% of the total mass of the solar system.',
+      'temp': '• Temperature: Around 15 million °C at the core and about 5,500 °C at the surface.',
+
+      'importance_title': '3. Importance',
+      'life': '• Life: Provides the light and heat necessary for life on Earth.',
+      'climate': '• Climate: Earth’s climate and weather are influenced by solar activity.',
+      'solar_energy': '• Solar Energy: The Sun’s energy is used in modern technology for electricity generation.',
+
+      'sun_rotation_title': '4. Rotation',
+      'rotation_text': 'The Sun rotates around its axis. At the equator, it takes about 25 days, while at the poles it takes about 35 days.',
+
+      'solar_activity_title': '5. Solar Activity',
+      'sunspots': '• Sunspots: Cooler, darker spots on the surface.',
+      'flares': '• Solar Flares: Sudden bursts of energy.',
+      'wind': '• Solar Wind: Streams of charged particles that affect Earth’s magnetic field.',
+
+      'sun_age_title': '6. Age',
+      'sun_age_text': 'The Sun is about 4.6 billion years old and will continue burning hydrogen for about another 5 billion years.',
+
+      'sun_resources': 'Resources',
+
+      // moon part
+      'moon': 'Moon',
+      'moon_title': 'Our Moon',
+      'moon_intro': 'The Moon is the Earth’s only natural satellite. It is the brightest object in the night sky and has a major influence on tides and life on Earth.',
+
+      'moon_structure_title': '1. Structure',
+      'crust': '• Crust: The solid outer layer.',
+      'mantle': '• Mantle: The dense rocky inner layer.',
+      'moon_core': '• Core: A small, partially molten metallic core.',
+
+      'moon_features_title': '2. Features',
+      'moon_size': '• Size: About 3,474 km in diameter (about 1/4 the size of Earth).',
+      'distance': '• Distance: An average of about 384,400 km from Earth.',
+      'gravity': '• Gravity: About 1/6th of Earth’s gravity.',
+
+      'surface_title': '3. Surface',
+      'craters': '• Craters: Large pits formed by asteroid impacts.',
+      'maria': '• Maria: Dark lava plains.',
+      'mountains': '• Mountains: Tall peaks and highlands.',
+
+      'phases_title': '4. Phases',
+      'phases_text': 'The phases of the Moon occur due to the changing positions of the Earth, Sun, and Moon. Main phases include New Moon, First Quarter, Full Moon, and Last Quarter.',
+
+      'moon_rotation_title': '5. Rotation and Orbit',
+      'moon_rotation_text': 'The Moon rotates on its axis and revolves around the Earth in about 27.3 days, which is why the same side always faces Earth.',
+
+      'influence_title': '6. Influence on Earth',
+      'tides': '• Tides: Caused by the Moon’s gravitational pull.',
+      'stability': '• Stability: Helps stabilize Earth’s rotational axis.',
+      'night_light': '• Light: Provides illumination at night.',
+
+      'moon_age_title': '7. Origin and Age',
+      'moon_age_text': 'The Moon formed about 4.5 billion years ago, likely as a result of a massive collision.',
+
+      'moon_resources': 'Resources',
+
     },
     'bn_BD': {
       // Mercury
@@ -355,6 +427,78 @@ class LocalizationString extends Translations {
       'satellites_text': 'মিল্কিওয়েতে কিছু ছোট উপগ্রহ গ্যালাক্সি রয়েছে যেমন লার্জ ম্যাজেলানিক ক্লাউড (LMC) এবং স্মল ম্যাজেলানিক ক্লাউড (SMC)।',
 
       'resources': 'তথ্যসূত্র',
+
+      'sun&moon': 'সূর্য ও চাঁদ',
+      // sun part
+      'sun': 'সূর্য',
+      'sun_title': 'আমাদের সূর্য',
+      'sun_intro': 'সূর্য হলো সৌরজগতের কেন্দ্রীয় নক্ষত্র। এটি একটি বিশাল গ্যাসীয় গোলক যা প্রধানত হাইড্রোজেন ও হিলিয়াম দ্বারা গঠিত এবং পৃথিবীতে জীবনের জন্য প্রয়োজনীয় শক্তির উৎস।',
+
+      'sun_structure_title': '১. গঠন',
+      'core': '• কেন্দ্র: সূর্যের কেন্দ্রে নিউক্লিয়ার ফিউশন ঘটে, যেখানে হাইড্রোজেন পরমাণু হিলিয়ামে রূপান্তরিত হয় এবং বিপুল শক্তি উৎপন্ন হয়।',
+      'radiative': '• বিকিরণ স্তর: শক্তি ধীরে ধীরে বাহিরের দিকে সঞ্চারিত হয়।',
+      'convective': '• কনভেকটিভ স্তর: উত্তপ্ত গ্যাসের সঞ্চালনের মাধ্যমে শক্তি বাহিরে যায়।',
+      'surface': '• পৃষ্ঠ (ফোটোস্ফিয়ার): এখান থেকেই আমরা সূর্যের আলো দেখতে পাই।',
+
+      'features_title': '২. বৈশিষ্ট্য',
+      'sun_size': '• আকার: সূর্যের ব্যাস প্রায় ১৪ লাখ কিমি, যা পৃথিবীর ব্যাসের প্রায় ১০৯ গুণ।',
+      'sun_mass': '• ভর: সৌরজগতের মোট ভরের প্রায় ৯৯.৮% সূর্যের ভর।',
+      'temp': '• তাপমাত্রা: কেন্দ্রে প্রায় ১৫ মিলিয়ন °C এবং পৃষ্ঠে প্রায় ৫,৫০০ °C।',
+
+      'importance_title': '৩. গুরুত্ব',
+      'life': '• জীবন: পৃথিবীতে জীবনের জন্য প্রয়োজনীয় আলো ও তাপ সূর্য সরবরাহ করে।',
+      'climate': '• জলবায়ু: পৃথিবীর জলবায়ু ও আবহাওয়া সূর্যের কার্যকলাপ দ্বারা প্রভাবিত হয়।',
+      'solar_energy': '• সৌরশক্তি: আধুনিক প্রযুক্তিতে সূর্যের শক্তি বিদ্যুৎ উৎপাদনে ব্যবহৃত হয়।',
+
+      'sun_rotation_title': '৪. ঘূর্ণন',
+      'rotation_text': 'সূর্য নিজ অক্ষের চারপাশে ঘূর্ণন করে। বিষুবরেখায় ঘূর্ণনকাল প্রায় ২৫ দিন এবং মেরু অঞ্চলে প্রায় ৩৫ দিন।',
+
+      'solar_activity_title': '৫. সৌর কার্যকলাপ',
+      'sunspots': '• সূর্যকলঙ্ক: পৃষ্ঠে ঠান্ডা ও অন্ধকার দাগ।',
+      'flares': '• সৌর জ্বালা: হঠাৎ শক্তি বিস্ফোরণ।',
+      'wind': '• সৌর বায়ু: চার্জযুক্ত কণার প্রবাহ যা পৃথিবীর চৌম্বকক্ষেত্রকে প্রভাবিত করে।',
+
+      'sun_age_title': '৬. বয়স',
+      'sun_age_text': 'সূর্যের বয়স প্রায় ৪.৬ বিলিয়ন বছর। এটি এখনও প্রায় ৫ বিলিয়ন বছর হাইড্রোজেন পোড়াবে।',
+
+      'sun_resources': 'তথ্যসূত্র',
+
+      // moon part
+      'moon': 'চাঁদ',
+      'moon_title': 'আমাদের চাঁদ',
+      'moon_intro': 'চাঁদ হলো পৃথিবীর একমাত্র প্রাকৃতিক উপগ্রহ। এটি রাতের আকাশের সবচেয়ে উজ্জ্বল বস্তু এবং পৃথিবীর জোয়ার-ভাটা ও জীবনের বিভিন্ন ক্ষেত্রে গুরুত্বপূর্ণ প্রভাব ফেলে।',
+
+      'moon_structure_title': '১. গঠন',
+      'crust': '• ভূত্বক: বাইরের কঠিন স্তর।',
+      'mantle': '• ম্যান্টল: অভ্যন্তরের ঘন শিলা স্তর।',
+      'moon_core': '• কেন্দ্র: ছোট ও আংশিক গলিত ধাতব কেন্দ্র।',
+
+      'moon_features_title': '২. বৈশিষ্ট্য',
+      'moon_size': '• আকার: ব্যাস প্রায় ৩,৪৭৪ কিমি (পৃথিবীর ব্যাসের প্রায় ১/৪ অংশ)।',
+      'distance': '• দূরত্ব: পৃথিবী থেকে গড় দূরত্ব প্রায় ৩,৮৪,৪০০ কিমি।',
+      'gravity': '• মহাকর্ষ: পৃথিবীর মহাকর্ষের প্রায় ১/৬ অংশ।',
+
+      'surface_title': '৩. পৃষ্ঠতল',
+      'craters': '• গর্ত: উল্কাপাতের ফলে সৃষ্টি বিশাল গর্ত।',
+      'maria': '• মেরিয়া: কালো লাভা সমভূমি।',
+      'mountains': '• পর্বত: উঁচু শৃঙ্গ ও উচ্চভূমি।',
+
+      'phases_title': '৪. কলা বা রূপ পরিবর্তন',
+      'phases_text': 'চাঁদের কলা পরিবর্তন ঘটে পৃথিবী, সূর্য ও চাঁদের অবস্থান পরিবর্তনের কারণে। প্রধান কলাগুলো হলো: অমাবস্যা, অর্ধচন্দ্র, পূর্ণিমা, কৃষ্ণপক্ষ।',
+
+      'moon_rotation_title': '৫. ঘূর্ণন ও পরিক্রমণ',
+      'moon_rotation_text': 'চাঁদ নিজ অক্ষের চারপাশে ঘুরে এবং একই সাথে পৃথিবীকে প্রদক্ষিণ করে প্রায় ২৭.৩ দিনে। এ কারণে পৃথিবী থেকে সবসময় একই দিক দেখা যায়।',
+
+      'influence_title': '৬. পৃথিবীতে প্রভাব',
+      'tides': '• জোয়ার-ভাটা: চাঁদের মহাকর্ষ শক্তির কারণে পৃথিবীতে জোয়ার-ভাটা হয়।',
+      'stability': '• স্থিতিশীলতা: পৃথিবীর ঘূর্ণন অক্ষ স্থিতিশীল রাখতে সাহায্য করে।',
+      'night_light': '• আলো: রাতে আলোর উৎস হিসেবে কাজ করে।',
+
+      'moon_age_title': '৭. উৎপত্তি ও বয়স',
+      'moon_age_text': 'চাঁদ প্রায় ৪.৫ বিলিয়ন বছর আগে গঠিত হয়েছে, সম্ভবত একটি বিশাল সংঘর্ষের ফলে।',
+
+      'moon_resources': 'তথ্যসূত্র',
+
     }
   };
 }
